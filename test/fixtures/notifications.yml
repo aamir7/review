@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  notification_type: 1
+  is_read: false
+  sender_id: 1
+
+two:
+  user_id: 
+  notification_type: 1
+  is_read: false
+  sender_id: 1

@@ -1,0 +1,18 @@
+// Place all the styles related to the AccountActivations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+span.rednum {
+  background: #cc0001;
+  border-radius: 3px;
+  color: #fff;
+  z-index: 999999;
+  font-weight: 600;
+  padding: 2px 6px;
+  box-shadow: 0 2px 3px rgba(0,0,0,.2), inset 0 2px 5px rgba(225,225,225,.3);
+  font-size: 13px;
+  margin-left: 5px;
+  position: relative;
+  display: inline-block;
+  // top: 10px;
+}

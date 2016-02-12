@@ -1,0 +1,12 @@
+<li class="dropdown">
+  <a id="notification-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+    <span class='rednum'> <%= unread_notifications.count %> </span> 
+  </a>
+  <ul class="dropdown-menu">
+    <% if(user_notifications.any?) %>
+      <%= render user_notifications %>
+    <% else %>
+      <li class="dropdown"> Notifications not avaliable! </li>
+    <% end %>
+  </ul>
+</li>
