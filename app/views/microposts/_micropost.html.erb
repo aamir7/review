@@ -9,4 +9,23 @@
                                        data: { confirm: "You sure?" } %>
     <% end %>
   </span>
+  
+  <% if micropost.comments.any? %>
+    <div class="actionBox">
+      <ul class="commentList">
+        <%= render micropost.comments %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-inline" role="form">
+    <%= form_for([micropost, micropost.comments.build]) do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Add Comment" %>
+      </div>
+    <% end %>
+  </div>  
 </li>
