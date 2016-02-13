@@ -1,5 +1,5 @@
 module ApplicationHelper
-  # Returns the full title on a per-page basis.
+  
   def page_title(sub_title = '')
     base_title = "Flitter"
 

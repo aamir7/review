@@ -1,5 +1,8 @@
 Flitter::Application.routes.draw do
   
+  devise_for :users
+#  resources :users, :only [:index, :show]
+  
   get "sessions/new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -7,13 +10,13 @@ Flitter::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root "welcome#index"
 
-  resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :create, :edit, :update]
+#  resources :account_activations, only: [:edit]
+#  resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :notifications,       only: [:update]
     
-  resources :users do
+  resources :users, only: [:index, :show, :destroy] do
     member do
       get :following, :followers
     end
@@ -23,7 +26,7 @@ Flitter::Application.routes.draw do
   post    'login'   =>  'sessions#create'
   delete  'logout'  =>  'sessions#destroy'
   
-  get     "signup"  =>  "users#new"
+#  get     "signup"  =>  "users#new"
   
   get     "help"    =>  "welcome#help"
   get     "about"   =>  "welcome#about"

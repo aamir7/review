@@ -32,10 +32,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'byebug'
+end
+
 gem 'bootstrap-sass',          '3.2.0.0'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
-gem 'byebug'
+gem 'devise',                  '3.4.1'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
