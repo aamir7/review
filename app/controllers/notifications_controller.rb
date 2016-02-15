@@ -1,8 +1,8 @@
 class NotificationsController < ApplicationController
 
   def update
-    if(unread_notifications.any?) 
-        current_user.notifications.each {|notification| notification.update_attribute(:is_read, true) }
+    if(current_user.unread_notifications.any?) 
+      current_user.notifications.update_all(is_read: true)#.each {|notification| notification.update_attribute(:is_read, true) }
     end
     render :nothing => true, :status => 200
   end

@@ -1,5 +1,5 @@
 <li>
-  <% user_name = sender_user_name(notification)%>
+  <% user_name = notification.user.name%>
   
   <% if(notification.notification_type == "follow") %>
     <%= user_name %> followed you.
