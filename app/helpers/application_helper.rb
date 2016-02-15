@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def page_title(sub_title = '')
-    base_title = "Flitter"
+    base_title = t('app_title')
 
     if sub_title.empty?
       base_title

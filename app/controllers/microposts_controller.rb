@@ -4,10 +4,10 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = t('micropost_posted')
       redirect_to root_path
     else
-      @feed_items = []
+      flash[:danger] = t('micropost_post_error')
       render 'welcome/index'
     end
   end
@@ -15,9 +15,9 @@ class MicropostsController < ApplicationController
   def destroy
     micropost = Micropost.find(params[:id])
     if micropost.destroy
-      flash[:success] = "Micropost deleted!"
+      flash[:success] = t('micropost_deleted')
     else
-      flash[:danger] = "Micropost not deleted!"
+      flash[:danger] = t('micropost_delete_error')
     end
     redirect_to request.referrer || root_path
   end

@@ -20,4 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  app_title:              "Flitter"
+  follower_title:         "Followers"
+  following_title:        "Following"
+  delete_confirm_msg:     "You sure?"
+  user_deleted:           "User deleted!"
+  user_delete_error:      "User not deleted!"
+  
+  comment_posted:         "Comment posted!"
+  comment_deleted:        "Comment deleted!"
+  comment_post_error:     "Comment not posted!"
+  comment_delete_error:   "Comment not deleted!"
+  micropost_posted:       "Micropost created!"
+  micropost_deleted:      "Micropost removed!"
+  micropost_post_error:   "Micropost not created!"
+  micropost_delete_error: "Micropost not removed!"

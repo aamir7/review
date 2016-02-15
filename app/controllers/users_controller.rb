@@ -21,20 +21,20 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user
       user.destroy
-      flash[:success] = "User deleted!"
+      flash[:success] = t('user_deleted')
     else
-      flash[:danger]  = "User not deleted!"
+      flash[:danger]  = t('user_delete_error')
     end
     redirect_to request.referrer || users_path
   end
   
   def following
-    @title = "Following"
+    @title = t('following_title')
     show_follow
   end
 
   def followers
-    @title = "Followers"
+    @title = t('follower_title')
     show_follow
   end
     
