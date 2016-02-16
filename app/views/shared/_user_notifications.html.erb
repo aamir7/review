@@ -1,6 +1,6 @@
 <li class="dropdown">
   <a id="notification-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-    <span class='rednum'> <%= current_user.notifications.unread_notifications.count %> </span> 
+    <span class='red-number'> <%= current_user.notifications.unread_notifications.count %> </span> 
   </a>
   <ul class="dropdown-menu">
     <% if(current_user.notifications.any?) %>
