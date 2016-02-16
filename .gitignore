@@ -15,4 +15,5 @@
 /log/*.log
 /tmp
 /tmp/
+.byebug_history
 **.DS_Store
