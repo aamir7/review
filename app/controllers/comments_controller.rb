@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
     
+  # POST "/microposts/20/comments"
   def create
     micropost = Micropost.find(params[:micropost_id])
     comment = micropost.comments.build(comment_params)
@@ -14,6 +15,7 @@ class CommentsController < ApplicationController
     redirect_to request.referrer || root_path
   end
   
+  #  DELETE "/microposts/20/comments/29"
   def destroy
     comment = Comment.find(params[:id])
     if comment && comment.destroy

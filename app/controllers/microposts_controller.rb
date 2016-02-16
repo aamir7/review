@@ -1,6 +1,7 @@
 class MicropostsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
 
+  # POST "/microposts
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
@@ -12,6 +13,7 @@ class MicropostsController < ApplicationController
     end
   end
 
+  #  DELETE "/microposts/20"
   def destroy
     micropost = Micropost.find(params[:id])
     if micropost.destroy

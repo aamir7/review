@@ -3,11 +3,13 @@ class UsersController < ApplicationController
                                               :following, :followers]
   before_action :ensure_admin,        only:   :destroy
 
+  #  GET "/users"
   def index
     @users = User.where("admin = :admin", admin: false).
                   paginate(page: params[:page], :per_page => 10)
   end
     
+  #  GET "/users/9"
   def show
     @user = User.find(params[:id])
     if @user
@@ -17,6 +19,7 @@ class UsersController < ApplicationController
     end
   end
   
+  #  DELETE "/users/9"
   def destroy
     user = User.find(params[:id])
     if user
@@ -28,11 +31,13 @@ class UsersController < ApplicationController
     redirect_to request.referrer || users_path
   end
   
+  #  GET "/users/9/following"
   def following
     @title = t('following_title')
     show_follow
   end
 
+  #  GET "/users/9/followers"
   def followers
     @title = t('follower_title')
     show_follow
