@@ -4,9 +4,13 @@ $( document ).ready(function() {
  			$.ajax({
  				url: '/notifications/update',
  				type: 'PATCH',
-      	success: function(response) {
-      		$('#notification-dropdown span').text('0');
-      	}
+      	success: function(data, status, xhr) {
+      		$('#notification-dropdown span').text(data.notification_count);
+//      		alert(data.notification_count);
+      	},
+        error: function(xhr, status, error) {
+          alert(error);
+        }
  			});
  		}
   });

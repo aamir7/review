@@ -55,4 +55,8 @@ class User < ActiveRecord::Base
   def unread_notifications
     notifications.where("is_read = :is_read", is_read: false)
   end
+  
+  def unread_notifications_count
+    notifications.where("is_read = :is_read", is_read: false).count
+  end
 end
