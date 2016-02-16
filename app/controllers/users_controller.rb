@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!,  only:  [:index, :edit, :update, :destroy,
                                               :following, :followers]
-  before_action :ensure_admin,       only:   :destroy
+  before_action :ensure_admin,        only:   :destroy
 
   def index
     @users = User.where("admin = :admin", admin: false).
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user
-      @microposts = @user.microposts.paginate(page: params[:page])
+      @microposts = @user.microposts.sort_posts.paginate(page: params[:page])
     else
       redirect_to request.referrer || users_path
     end

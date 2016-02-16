@@ -29,11 +29,13 @@ class User < ActiveRecord::Base
   
   validates :password, presence: true, length: { minimum: 6 },
                        allow_nil: true
-    
+      
+  ###############################################################
+                       
   def feed
     following_ids = Relationship.where("follower_id = :user_id", user_id: id).pluck(:followed_id)
     Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
-                     user_id: id, following_ids: following_ids)
+                     user_id: id, following_ids: following_ids).sort_posts
   end
     
   def follow(other_user)
@@ -50,13 +52,5 @@ class User < ActiveRecord::Base
   
   def following?(other_user)
     following.include?(other_user)
-  end
-
-  def unread_notifications
-    notifications.where("is_read = :is_read", is_read: false)
-  end
-  
-  def unread_notifications_count
-    notifications.where("is_read = :is_read", is_read: false).count
   end
 end

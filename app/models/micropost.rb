@@ -1,6 +1,6 @@
 class Micropost < ActiveRecord::Base
   belongs_to :user
-  default_scope lambda { order(created_at: :desc) }
+  scope :sort_posts, lambda { order(created_at: :desc) }
   
   has_many :comments, dependent: :destroy
   
