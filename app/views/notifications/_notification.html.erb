@@ -1,15 +1,18 @@
-<li>
-  <% user_name = notification.user.name%>
-  
-  <% if(notification.notification_type == "follow") %>
-    <%= user_name %> followed you.
-  <% elsif(notification.notification_type == "unfollow") %>
-    <%= user_name %> unfollowed you.
-  <% elsif(notification.notification_type == "commented") %>
-    <%= user_name %> commented on your post.
-  <% end %>
-  <span class="timestamp">
-    <%= time_ago_in_words(notification.created_at) %> ago.
-  </span>
-</li>
 <li class="divider"></li>
+<li>
+  <% user_name = notification.sender.name%>
+  <% type = notification.notification_type%>
+  <a href="#">
+    <% if(type == "follow") %>
+      <%= user_name %> followed you.
+    <% elsif(type == "unfollow") %>
+      <%= user_name %> unfollowed you.
+    <% elsif(type == "comment") %>
+      <%= user_name %> commented on your post.
+    <% end %>
+    <br/>
+    <span class="timestamp">
+      <i><%= time_ago_in_words(notification.created_at) %> ago.</i>
+    </span>
+  </a>
+</li>

@@ -31,7 +31,9 @@ en:
   comment_deleted:        "Comment deleted!"
   comment_post_error:     "Comment not posted!"
   comment_delete_error:   "Comment not deleted!"
-  micropost_posted:       "Micropost created!"
-  micropost_deleted:      "Micropost removed!"
-  micropost_post_error:   "Micropost not created!"
-  micropost_delete_error: "Micropost not removed!"
+  
+  micropost_posted:           "Micropost created!"
+  micropost_deleted:          "Micropost removed!"
+  micropost_post_error:       "Micropost not created!"
+  micropost_delete_error:     "Micropost not removed!"
+  micropost_not_found_error:  "Micropost not found!"
