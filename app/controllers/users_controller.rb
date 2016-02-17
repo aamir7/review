@@ -55,7 +55,12 @@ class UsersController < ApplicationController
   def follow
     @user = User.find_by(id: params[:user_id])
     if @user
-      current_user.follow(@user)
+      begin
+        current_user.follow(@user)
+      rescue Errors::FlitterError => err      
+        flash[:error] = err.message
+      end
+      
       respond_to do |format|
         format.html { redirect_to @user }
         format.js
@@ -70,7 +75,12 @@ class UsersController < ApplicationController
   def unfollow
     @user = User.find_by(id: params[:user_id])
     if @user
-      current_user.unfollow(@user)
+      begin
+        current_user.unfollow(@user)
+      rescue Errors::FlitterError => err      
+        flash[:error] = err.message
+      end
+              
       respond_to do |format|
         format.html { redirect_to @user }
         format.js

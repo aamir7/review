@@ -32,14 +32,19 @@ class User < ActiveRecord::Base
   end
     
   def follow(other_user)
-    active_relationships.create(followed_id: other_user.id)
-    other_user.send_notification(self, :followed)
+    if active_relationships.create!(followed_id: other_user.id).valid?
+      other_user.send_notification(self, :followed)
+    else
+      raise Errors::FlitterError.new(I18n.t(:follow_error))
+    end
   end
   
   def unfollow(other_user)
     relation = active_relationships.find_by(followed_id: other_user.id)
     if relation && relation.destroy
       other_user.send_notification(self, :unfollowed)
+    else
+      raise Errors::FlitterError.new(I18n.t(:unfollow_error))
     end
   end
   

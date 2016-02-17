@@ -24,6 +24,8 @@ en:
   follower_title:             "Followers"
   following_title:            "Following"
   delete_confirm_msg:         "You sure?"
+  follow_error:               "Could not follow the user. Try again later!"
+  unfollow_error:             "Could not unfollow the user. Try again later!"
   authorization_error:        "Sorry! You don't have rights to perform this action!"
   
   user_deleted:               "User deleted!"
