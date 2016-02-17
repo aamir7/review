@@ -20,17 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  app_title:              "Flitter"
-  follower_title:         "Followers"
-  following_title:        "Following"
-  delete_confirm_msg:     "You sure?"
-  user_deleted:           "User deleted!"
-  user_delete_error:      "User not deleted!"
+  app_title:                  "Flitter"
+  follower_title:             "Followers"
+  following_title:            "Following"
+  delete_confirm_msg:         "You sure?"
+  authorization_error:        "Sorry! You don't have rights to perform this action!"
   
-  comment_posted:         "Comment posted!"
-  comment_deleted:        "Comment deleted!"
-  comment_post_error:     "Comment not posted!"
-  comment_delete_error:   "Comment not deleted!"
+  user_deleted:               "User deleted!"
+  user_delete_error:          "User not deleted!"
+  user_not_found_error:       "User not found!"
+  
+  comment_posted:             "Comment posted!"
+  comment_deleted:            "Comment deleted!"
+  comment_post_error:         "Comment not posted!"
+  comment_delete_error:       "Comment not deleted!"
   
   micropost_posted:           "Micropost created!"
   micropost_deleted:          "Micropost removed!"

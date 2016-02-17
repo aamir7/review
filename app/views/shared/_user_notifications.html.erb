@@ -1,10 +1,10 @@
 <li class="dropdown">
   <a id="notification-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-    <span class='red-number'> <%= current_user.notifications.unread_notifications.count %> </span> 
+    <span class='red-number'> <%= current_user.notifications.unread.count %> </span> 
   </a>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu scrollable-menu">
     <% if(current_user.notifications.any?) %>
-      <% current_user.notifications.sort_notifications.each do |notification|%>
+      <% current_user.notifications.each do |notification|%>
         <%= render "notifications/notification", notification: notification %>
       <% end %>
     <% else %>

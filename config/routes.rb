@@ -12,8 +12,8 @@ Flitter::Application.routes.draw do
 
 #  resources :account_activations, only: [:edit]
 #  resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :relationships,       only: [:create, :destroy]
-  resources :notifications,       only: [:update]
+#  resources :relationships,       only: [:create, :destroy]
+#  resources :notifications,       only: [:update]
     
   resources :microposts,  only: [:create, :destroy] do
     resources :comments,  only: [:new, :create, :destroy]
@@ -21,10 +21,13 @@ Flitter::Application.routes.draw do
     
   resources :users, only: [:index, :show, :destroy] do
     member do
-      get :following, :followers
+      get     :following, :followers
+      post    :follow
+      delete  :unfollow
     end
   end
     
+  patch   'notifications/read_all'  => 'notifications#read_all'
 #  get     'login'   =>  'sessions#new'
 #  post    'login'   =>  'sessions#create'
 #  delete  'logout'  =>  'sessions#destroy'

@@ -3,11 +3,11 @@
   <% user_name = notification.sender.name%>
   <% type = notification.notification_type%>
   <a href="#">
-    <% if(type == "follow") %>
+    <% if(type == "followed") %>
       <%= user_name %> followed you.
-    <% elsif(type == "unfollow") %>
+    <% elsif(type == "unfollowed") %>
       <%= user_name %> unfollowed you.
-    <% elsif(type == "comment") %>
+    <% elsif(type == "commented_on_post") %>
       <%= user_name %> commented on your post.
     <% end %>
     <br/>

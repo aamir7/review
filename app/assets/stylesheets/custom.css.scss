@@ -302,3 +302,9 @@ span.red-number {
   display: inline-block;
   // top: 10px;
 }
+
+ul.scrollable-menu {
+  height: auto;
+  max-height: 400px;
+  overflow-x: hidden;
+}

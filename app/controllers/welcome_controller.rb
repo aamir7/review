@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   
-  #  GET "/"
+  #  GET /
   def index
     if user_signed_in?
       @micropost  = current_user.microposts.build

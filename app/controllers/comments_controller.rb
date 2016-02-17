@@ -1,38 +1,30 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
     
-  # POST "/microposts/20/comments"
+  # POST /microposts/:micropost_id/comments
   def create
-    micropost = Micropost.find(params[:micropost_id])
+    micropost = Micropost.find_by(id: params[:micropost_id])
     if micropost
-      comment = micropost.comments.build(comment_params)
-      comment.user = current_user
-    
-      if comment.save
-        flash[:success] = t('comment_posted')
-        micropost.user.notifications.create(sender_id: current_user.id, notification_type: :comment)
-      else
-        flash[:danger] = t('comment_post_error')
-      end
+      micropost.post_comment(comment_params)
     else
-      flash[:danger] = t('micropost_not_found_error')
+      flash[:danger] = t(:micropost_not_found_error)
     end
-    redirect_to request.referrer || root_path
+    redirect_to :back || root_path
   end
   
-  #  DELETE "/microposts/20/comments/29"
+  #  DELETE /microposts/:micropost_id/comments/:id
   def destroy
-    comment = Comment.find(params[:id])
+    comment = Comment.find_by(id: params[:id])
     if comment && comment.destroy
-      flash[:success] = t('comment_deleted')
+      flash[:success] = t(:comment_deleted)
     else
-      flash[:danger] = t('comment_delete_error')
+      flash[:danger] = t(:comment_delete_error)
     end
-    redirect_to request.referrer || root_path
+    redirect_to :back || root_path
   end
     
+  #  --------------- ------- Private Methods ------- -------------------
   private 
-    def comment_params
-      params.require(:comment).permit(:content)
-    end
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 end

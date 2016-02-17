@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
   devise :registerable, :confirmable,  :database_authenticatable,
          :recoverable,  :rememberable, :validatable
   
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  
   has_many :comments,       dependent:    :destroy
   has_many :microposts,     dependent:    :destroy
   has_many :notifications,  dependent:    :destroy
@@ -24,34 +22,32 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   
   validates :name,  presence: true, length: { maximum: 50 }
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
-  
-  validates :password, presence: true, length: { minimum: 6 },
-                       allow_nil: true
       
-  ###############################################################
+  #  --------------- ------- Methods ------- -------------------
                        
   def feed
-    following_ids = Relationship.where("follower_id = :user_id", user_id: id).pluck(:followed_id)
-    Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
-                     user_id: id, following_ids: following_ids).sort_posts
+    res = microposts.union(
+      Micropost.joins("JOIN relationships ON ((microposts.user_id = relationships.followed_id AND relationships.follower_id = #{id} ))")
+    ).order(created_at: :desc)
   end
     
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
-    other_user.notifications.create(sender_id: id, notification_type: :follow)
+    other_user.send_notification(self, :followed)
   end
   
   def unfollow(other_user)
     relation = active_relationships.find_by(followed_id: other_user.id)
     if relation && relation.destroy
-      other_user.notifications.create(sender_id: id, notification_type: :unfollow)
+      other_user.send_notification(self, :unfollowed)
     end
   end
   
   def following?(other_user)
     following.include?(other_user)
+  end
+  
+  def send_notification(sender_user, notification_type)
+    notifications.create(sender_id: sender_user.id, notification_type: notification_type)
   end
 end
