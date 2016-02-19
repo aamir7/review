@@ -18,14 +18,9 @@
     </div>
   <% end %>
   
-  <div class="form-inline" role="form">
-    <%= form_for([micropost, micropost.comments.build]) do |f| %>
-      <div class="form-group">
-        <%= f.text_area :content %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Add Comment" %>
-      </div>
+  <div id="add-comment-on-post-<%= micropost.id %>" class="form-inline" role="form">  
+    <% if can? :create, micropost.comments.build %>
+      <%= render 'shared/comment_form', micropost: micropost %>
     <% end %>
-  </div>  
+  </div>
 </li>

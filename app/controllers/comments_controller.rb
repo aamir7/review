@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :micropost
+  load_and_authorize_resource :comment, through: :micropost
   
   # POST /microposts/:micropost_id/comments
   def create

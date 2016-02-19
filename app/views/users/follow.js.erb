@@ -1,2 +1,5 @@
 $("#follow_form").html("<%= escape_javascript(render('unfollow')) %>");
 $("#followers").html('<%= @user.followers.count %>');
+<% @user.microposts.each do |micropost| %>
+  $("#add-comment-on-post-<%= micropost.id %>").html("<%= escape_javascript(render 'shared/comment_form', micropost: micropost) %>");
+<% end %>

@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  around_action :set_current_user
   
   protect_from_forgery    with: :exception
   rescue_from Exception,  with: :handle_exceptions
@@ -10,9 +12,16 @@ class ApplicationController < ActionController::Base
   def current_ability
     @current_ability ||= AbilityFactory.build_ability_for(current_user)
   end
-    
+              
   # ------------ Exceptions -----------
   private
+  def set_current_user
+    User.current_user = current_user
+    yield
+#  ensure
+#    User.current_user = nil
+  end 
+      
   def handle_exceptions(exception)
     logger.error "Error Message: #{exception.message}"
     logger.error exception.backtrace.join("\n")

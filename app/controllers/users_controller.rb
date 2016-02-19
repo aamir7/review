@@ -47,9 +47,8 @@ class UsersController < ApplicationController
     end
   end
   
-  #  POST /users/:id/follow/:user_id
+  #  POST /users/:id/follow
   def follow
-    @user = User.find_by(id: params[:user_id])
     if @user
       current_user.follow(@user)
       respond_to do |format|
@@ -62,9 +61,8 @@ class UsersController < ApplicationController
 
   end
 
-  #  DELETE /users/:id/unfollow/:user_id
+  #  DELETE /users/:id/unfollow
   def unfollow
-    @user = User.find_by(id: params[:user_id])
     if @user
       current_user.unfollow(@user)       
       respond_to do |format|

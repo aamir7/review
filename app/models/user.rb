@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
       raise Errors::FlitterError.new(I18n.t(:follow_error))
     end
   end
+ 
   
   def unfollow(other_user)
     relation = active_relationships.find_by(followed_id: other_user.id)
@@ -47,8 +48,25 @@ class User < ActiveRecord::Base
     end
   end
   
-  def following?(other_user)
-    following.include?(other_user)
+#  def following?(other_user)
+#    following.include?(other_user)
+#  end
+  
+  def self.current_user=(user)
+    Thread.current[:user] = user
+  end
+  
+  def self.current_user
+    Thread.current[:user]
+  end
+  
+  def following?
+    following.include?(User.current_user)
+  end
+  
+  def followed?
+    byebug
+    User.current_user.following.include?(self)
   end
   
   def send_notification(sender_user, notification_type)
