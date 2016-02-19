@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   
   #  DELETE /users/:id
   def destroy
-    if user && user.destroy
+    if @user && @user.destroy
       flash[:success] = t(:user_deleted)
     else
       flash[:danger]  = t(:user_delete_error)
