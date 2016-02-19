@@ -23,8 +23,7 @@ class User < ActiveRecord::Base
   
   validates :name,  presence: true, length: { maximum: 50 }
       
-  #  --------------- ------- Methods ------- -------------------
-                       
+  #  --------------- ------- Methods ------- -------------------                  
   def feed
     res = microposts.union(
       Micropost.joins("JOIN relationships ON ((microposts.user_id = relationships.followed_id AND relationships.follower_id = #{id} ))")

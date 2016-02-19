@@ -1,10 +1,12 @@
 class CommentsController < ApplicationController
-    
+  load_and_authorize_resource
+  
   # POST /microposts/:micropost_id/comments
   def create
     micropost = Micropost.find_by(id: params[:micropost_id])
     if micropost
-      micropost.post_comment(comment_params)
+      micropost.post_comment(comment_params, current_user)
+      flash[:success] = I18n::t(:comment_posted)
     else
       flash[:danger] = t(:micropost_not_found_error)
     end
@@ -13,8 +15,7 @@ class CommentsController < ApplicationController
   
   #  DELETE /microposts/:micropost_id/comments/:id
   def destroy
-    comment = Comment.find_by(id: params[:id])
-    if comment && comment.destroy
+    if @comment && @comment.destroy
       flash[:success] = t(:comment_deleted)
     else
       flash[:danger] = t(:comment_delete_error)

@@ -5,3 +5,31 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Inserting default security users
+users = {
+  admin: {
+    name: 'Admin',
+    email: 'admin@flitter.com',
+    password: 'password',
+    password_confirmation: 'password',
+    role: :admin
+  },
+
+  administrator: {
+    name: 'Administrator',
+    email: 'administrator@flitter.com',
+    password: 'password',
+    password_confirmation: 'password',
+    role: :admin
+  }
+}
+
+users.each do |user, data|
+  user = User.new(data)
+
+  unless User.where(email: user.email).exists?
+    user.skip_confirmation!
+    user.save!
+  end
+end

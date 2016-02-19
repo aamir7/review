@@ -1,5 +1,6 @@
 class MicropostsController < ApplicationController
-
+  load_and_authorize_resource
+  
   # POST /microposts
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -8,14 +9,13 @@ class MicropostsController < ApplicationController
       redirect_to root_path #to show updated post
     else
       flash[:danger] = t(:micropost_post_error)
-      render 'welcome/index' #flash message display is enough
+      render 'welcome/index'
     end
   end
 
   #  DELETE /microposts/:id
   def destroy
-    micropost = Micropost.find_by(id: params[:id])
-    if micropost && micropost.destroy
+    if @micropost && @micropost.destroy
       flash[:success] = t(:micropost_deleted)
     else
       flash[:danger] = t(:micropost_delete_error)

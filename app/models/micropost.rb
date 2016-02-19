@@ -8,15 +8,14 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 140 }
     
   #  --------------- ------- Methods ------- -------------------
-  def post_comment
-    comment = micropost.comments.build(comment_params)
-    comment.user = current_user
+  def post_comment(comment_params, commenter)
+    comment = comments.build(comment_params)
+    comment.user = commenter
         
     if comment.save
-      flash[:success] = t(:comment_posted)
-      micropost.user.send_notification(current_user, :commented_on_post)
+      user.send_notification(commenter, :commented_on_post)
     else
-      flash[:danger] = t(:comment_post_error)
+      raise Errors::FlitterError.new(I18n::t(:comment_post_error))
     end
   end
 end
