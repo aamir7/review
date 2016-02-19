@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
     
   def follow(other_user)
-    if active_relationships.create!(followed_id: other_user.id).valid?
+    if active_relationships.create(followed_id: other_user.id).valid?
       other_user.send_notification(self, :followed)
     else
       raise Errors::FlitterError.new(I18n.t(:follow_error))
@@ -61,12 +61,11 @@ class User < ActiveRecord::Base
   end
   
   def following?
-    following.include?(User.current_user)
+    following.where(id: User.current_user.id).any?
   end
   
   def followed?
-    byebug
-    User.current_user.following.include?(self)
+    User.current_user.following.where(id: self.id).any?
   end
   
   def send_notification(sender_user, notification_type)
