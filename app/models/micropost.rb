@@ -13,7 +13,7 @@ class Micropost < ActiveRecord::Base
     comment.user = commenter
         
     if comment.save
-      user.send_notification(commenter, :commented_on_post)
+      user.send_notification(commenter, :commented_on_post) unless user == commenter
     else
       raise Errors::FlitterError.new(I18n::t(:comment_post_error))
     end
