@@ -1,6 +1,6 @@
 module ApplicationHelper
   
-  def page_title(sub_title = '')
+  def page_title(sub_title = nil)
     base_title = t(:app_title)
 
     if sub_title.blank?

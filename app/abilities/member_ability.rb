@@ -9,17 +9,6 @@ class MemberAbility < Ability
     can :read,  [Micropost, Comment]
     can [:destroy],  Comment, user_id: user.id
     can [:create, :destroy],  Micropost, user_id: user.id
-    
-#    can :post_comment, Post do |p|
-#      user.following.include?(p.user)
-#    end
-#    byebug
     can :create, Comment, micropost: { user_id: user.following_ids << user.id }
-#      byebug
-#      
-#    can :create, Comment do |c|
-#      byebug
-#      user.following.include?(c.micropost.user)
-#    end
   end
 end

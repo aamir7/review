@@ -1,6 +1,6 @@
 Flitter::Application.routes.draw do
   
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
 #  resources :users, :only [:index, :show]
   
 #  get "sessions/new"
@@ -27,6 +27,7 @@ Flitter::Application.routes.draw do
     end
   end
     
+  get     '/home'                   => 'home#index', as: :user_root
   patch   'notifications/read_all'  => 'notifications#read_all'
 #  get     'login'   =>  'sessions#new'
 #  post    'login'   =>  'sessions#create'

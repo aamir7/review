@@ -2,7 +2,7 @@ class Notification < ActiveRecord::Base
   belongs_to :user
   belongs_to :sender, class_name: "User"
   
-  default_scope   lambda { order(created_at: :desc) }
+  default_scope   lambda { order(id: :desc) }
   scope :unread,  lambda { where(is_read: false) }
     
   validates :user,    presence: true
