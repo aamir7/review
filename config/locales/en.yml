@@ -1,0 +1,44 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  app_title:                  "Flitter"
+  follower_title:             "Followers"
+  following_title:            "Following"
+  delete_confirm_msg:         "You sure?"
+  follow_error:               "Could not follow the user. Try again later!"
+  unfollow_error:             "Could not unfollow the user. Try again later!"
+  authorization_error:        "Sorry! You don't have rights to perform this action!"
+  
+  user_deleted:               "User deleted!"
+  user_delete_error:          "User not deleted!"
+  user_not_found_error:       "User not found!"
+  
+  comment_posted:             "Comment posted!"
+  comment_deleted:            "Comment deleted!"
+  comment_post_error:         "Comment not posted!"
+  comment_delete_error:       "Comment not deleted!"
+  
+  micropost_posted:           "Micropost created!"
+  micropost_deleted:          "Micropost removed!"
+  micropost_post_error:       "Micropost not created!"
+  micropost_delete_error:     "Micropost not removed!"
+  micropost_not_found_error:  "Micropost not found!"

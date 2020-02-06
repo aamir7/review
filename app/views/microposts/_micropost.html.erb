@@ -1,0 +1,26 @@
+<li id="micropost-<%= micropost.id %>">
+  <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+  <span class="content"><%= micropost.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+    <% if can? :destroy, micropost %> <!-- current_user == micropost.user -->
+      <%= link_to "delete", micropost, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+  
+  <% if micropost.comments.any? %>
+    <div class="actionBox">
+      <ul class="commentList">
+        <%= render micropost.comments %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div id="add-comment-on-post-<%= micropost.id %>" class="form-inline" role="form">  
+    <% if can? :create, micropost.comments.build %>
+      <%= render 'shared/comment_form', micropost: micropost %>
+    <% end %>
+  </div>
+</li>

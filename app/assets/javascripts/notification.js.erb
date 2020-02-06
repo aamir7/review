@@ -1,0 +1,17 @@
+$( document ).on('page:change', function() {
+  $("#notification-dropdown").bind("click", function() {
+    if (!$("#notification-dropdown").parent().hasClass("dropdown open")) {
+      $.ajax({
+        url: '<%= Rails.application.routes.url_helpers.notifications_read_all_path %>',
+        type: 'PATCH',
+        dataType: 'script'
+      })
+      .done(function(res) {
+        console.log(res);
+      })
+      .fail(function(err) {
+        console.log('Error: ' + err.status);
+      });
+    }
+  });
+});

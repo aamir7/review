@@ -1,0 +1,5 @@
+$("#follow_form").html("<%= escape_javascript(render('follow')) %>");
+$("#followers").html('<%= @user.followers.count %>');
+<% @user.microposts.each do |post| %>
+  $("#add-comment-on-post-<%= post.id %>").empty();
+<% end %>

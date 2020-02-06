@@ -1,0 +1,3 @@
+<%= form_for(current_user, url: follow_user_path, html: { method: :post }, remote: true) do |f| %>
+  <%= f.submit "Follow", class: "btn btn-primary" %>
+<% end %>
